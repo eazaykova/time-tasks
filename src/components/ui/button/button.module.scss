@@ -1,0 +1,12 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_mixins.scss';
+
+.button {
+	@include transition(color);
+	cursor: pointer;
+	color: $text-gray;
+
+	&:hover {
+		color: $primary;
+	}
+}

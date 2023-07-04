@@ -23,7 +23,6 @@ class RQuery {
 	 * @param {string} selector - A CSS selector string to search for within the selected element.
 	 * @returns {RQuery} A new RQuery instance for the found element.
 	 */
-
 	find(selector) {
 		const element = new RQuery(this.element.querySelector(selector));
 		if (element) {
@@ -76,6 +75,77 @@ class RQuery {
 			this.element.innerHTML = htmlContent;
 			return this;
 		}
+	}
+
+	/**
+	 * Get or set the text content of the selected element.
+	 * @param {string} [textContent] - Optional text content to set. If not provided, the current text content will be returned.
+	 * @returns {RQuery|string} - The current RQuery instance for chaining when setting text content, or the current text content when getting.
+	 */
+	text(textContent) {
+		if (typeof textContent === 'undefined') {
+			return this.element.textContent;
+		} else {
+			this.element.textContent = textContent;
+			return this;
+		}
+	}
+	/* EVENTS */
+
+	/**
+	 * Attach a click event listener to the selected element.
+	 * @param {function(Event): void} callback - The event listener function to execute when the selected element is clicked.
+	 * The function will receive the event object as its argument.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	click(callback) {
+		this.element.addEventListener('click', callback);
+		return this;
+	}
+
+	/* FORM */
+
+	/**
+	 * Set attributes and event listeners for an input element.
+	 * @param {object} options - An object containing input options.
+	 * @param {function(Event): void} [options.onInput] - The event
+	 * listener for the input's input event.
+	 * @param {object} [options.rest] - Optional attributes to set on
+	 * the input element.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	input({ onInput, ...rest }) {
+		if (this.element.tagName.toLowerCase() !== 'input') {
+			throw new Error('Element must be an input!');
+		}
+		for (const [key, value] of Object.entries(rest)) {
+			this.element.setAttribute(key, value);
+		}
+
+		if (onInput) {
+			this.element.addEventListener('input', onInput);
+		}
+
+		return this;
+	}
+
+	/* STYLES */
+
+	/**
+	 * Adds a class or a list of classes to the current element.
+	 * @param {string | string[]} classNames - A single class name or
+	 * an array of class names to add to the element.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	addClass(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.add(className);
+			}
+		} else {
+			this.element.classList.add(classNames);
+		}
+		return this;
 	}
 }
 

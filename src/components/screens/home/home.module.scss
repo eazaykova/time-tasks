@@ -2,4 +2,14 @@
 @import 'src/styles/_mixins.scss';
 
 .home {
+	> .link {
+		@include transition(color);
+		cursor: pointer;
+		color: $text-gray;
+		border-bottom: none;
+
+		&:hover {
+			color: $primary;
+		}
+	}
 }
