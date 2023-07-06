@@ -1,0 +1,22 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_mixins.scss';
+
+.create-task-item {
+	display: grid;
+	grid-template-columns: 7fr 1fr auto auto;
+	border: 1px solid #ffffff0e;
+	border-radius: $radius;
+	gap: 15px;
+	align-items: center;
+	padding: 15px;
+
+	> button {
+		width: 40px;
+		height: 40px;
+		padding: 0;
+
+		> img {
+			fill: $white;
+		}
+	}
+}

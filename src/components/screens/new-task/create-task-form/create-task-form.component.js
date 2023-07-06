@@ -6,12 +6,12 @@ import { Store } from '@/core/store/store';
 
 import { Button } from '@/components/ui/button/button.component';
 import { Field } from '@/components/ui/field/field.component';
-import { Title } from '@/components/ui/title/title.component';
+import { Text } from '@/components/ui/text/text.component';
 
-import styles from './create-task.module.scss';
-import template from './create-task.template.html';
+import styles from './create-task-form.module.scss';
+import template from './create-task-form.template.html';
 
-export class CreateTask extends ChildComponent {
+export class CreateTaskForm extends ChildComponent {
 	constructor() {
 		super();
 
@@ -24,10 +24,12 @@ export class CreateTask extends ChildComponent {
 		if (!this.store.state.block) {
 			this.store.updateBlocks({
 				title: formValues['title-block'],
-				tasks: [{ title: formValues['task'], time: formValues['time'] }]
+				tasks: [{ id: 0, title: formValues['task'], time: formValues['time'] }]
 			});
 		} else {
+			let length = this.store.state.block.block.tasks.length;
 			this.store.addTask({
+				id: this.store.state.block.block.tasks[length - 1].id + 1,
 				title: formValues['task'],
 				time: formValues['time']
 			});
@@ -44,7 +46,7 @@ export class CreateTask extends ChildComponent {
 
 	render() {
 		$R(this.element)
-			.find('#create-task')
+			.find('#create-task-form')
 			.append(
 				new Field({
 					placeholder: 'Введите название блока',
@@ -57,7 +59,7 @@ export class CreateTask extends ChildComponent {
 					name: 'task'
 				}).render()
 			)
-			.append(new Title('Таймер (h:m):').render())
+			.append(new Text('Таймер (h:m):').render())
 			.append(
 				new Field({
 					type: 'time',
