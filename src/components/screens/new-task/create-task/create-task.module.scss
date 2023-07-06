@@ -1,0 +1,43 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_mixins.scss';
+
+form {
+	background-color: $bg-block;
+	border-radius: $radius;
+	border: 1px solid transparent;
+	padding: 15px 20px;
+	margin-top: 1rem;
+
+	.create-task {
+		display: grid;
+		grid-template-columns: 9fr auto auto;
+		margin-top: 1.3rem;
+
+		& > div:first-child {
+			grid-column-start: 1;
+			grid-column-end: 4;
+			margin-bottom: 1.3rem;
+		}
+
+		& > div:not(:first-child) {
+			grid-row-start: 2;
+			grid-row-end: 3;
+			color: $text-gray;
+		}
+
+		& > :nth-child(3) {
+			align-self: center;
+			margin: 0 15px;
+		}
+	}
+
+	> .buttons {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 1.3rem;
+
+		> button:first-child {
+			margin-right: 15px;
+		}
+	}
+}

@@ -2,18 +2,4 @@
 @import 'src/styles/_mixins.scss';
 
 .new-task {
-	> div {
-		display: grid;
-		grid-template-columns: 9fr auto auto;
-
-		& > div:first-child {
-			margin-right: $gap;
-		}
-
-		& > div:nth-child(2) {
-			margin-right: 15px;
-			margin-top: 0.8rem;
-			color: $text-gray;
-		}
-	}
 }

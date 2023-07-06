@@ -32,6 +32,17 @@ class RQuery {
 		}
 	}
 
+	/**
+	 * Find all elements that match the specified selector within the
+	 * selected element.
+	 * @param {string} selector - A CSS selector string to search for within the selected element.
+	 * @returns {RQuery[]} An array of new RQuery instances for the found elements.
+	 */
+	findAll(selector) {
+		const elements = this.element.querySelectorAll(selector);
+		return Array.from(elements).map(element => new RQuery(element));
+	}
+
 	/*  INSERT */
 
 	/**
@@ -106,6 +117,20 @@ class RQuery {
 	/* FORM */
 
 	/**
+	 * Gets or sets the value of an input element.
+	 * @param {string} [newValue] - The new value to set for the input element. If not provided, the method returns the current value.
+	 * @return {string|RQuery} - If newValue is provided, returns the RQuery instance. Otherwise, returns the current value of the input element.
+	 */
+	value(newValue) {
+		if (typeof newValue === 'undefined') {
+			return this.element.value;
+		} else {
+			this.element.value = newValue;
+			return this;
+		}
+	}
+
+	/**
 	 * Set attributes and event listeners for an input element.
 	 * @param {object} options - An object containing input options.
 	 * @param {function(Event): void} [options.onInput] - The event
@@ -129,6 +154,24 @@ class RQuery {
 		return this;
 	}
 
+	/**
+	 * Set an event listener for submit event of a form element.
+	 * @param {function(Event): void} onSubmit - The event listener for the form's submit event.
+	 * @returns {RQuery} - The current RQuery instance for chaining.
+	 */
+	submit(onSubmit) {
+		if (this.element.tagName.toLowerCase() === 'form') {
+			this.element.addEventListener('submit', e => {
+				e.preventDefault();
+				onSubmit(e);
+			});
+		} else {
+			throw new Error('Element must be a from!');
+		}
+
+		return this;
+	}
+
 	/* STYLES */
 
 	/**
@@ -146,6 +189,28 @@ class RQuery {
 			this.element.classList.add(classNames);
 		}
 		return this;
+	}
+
+	/**
+	 * Set or get the value of an attribute on the selected element.
+	 * @param {string} attributeName - The name of the attribute to set
+	 * or get.
+	 * @param {string} [value] - The value to set for the attribute. If
+	 * not provided, the current value of the attribute will be returned.
+	 * @returns {RQuery|string} The current RQuery instance for
+	 * chaining (if setting) or the attribute value (if getting).
+	 */
+	attr(attributeName, value) {
+		if (typeof attributeName !== 'string') {
+			throw new Error('Attribute name must be a string!');
+		}
+
+		if (typeof value === 'undefined') {
+			return this.element.getAttribute(attributeName);
+		} else {
+			this.element.setAttribute(attributeName, value);
+			return this;
+		}
 	}
 }
 
