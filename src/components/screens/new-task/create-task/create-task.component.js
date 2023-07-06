@@ -2,6 +2,7 @@ import ChildComponent from '@/core/component/child.component';
 import { $R } from '@/core/rquery/rquery.lib';
 import formService from '@/core/services/form.service';
 import renderService from '@/core/services/render.service';
+import { Store } from '@/core/store/store';
 
 import { Button } from '@/components/ui/button/button.component';
 import { Field } from '@/components/ui/field/field.component';
@@ -11,10 +12,28 @@ import styles from './create-task.module.scss';
 import template from './create-task.template.html';
 
 export class CreateTask extends ChildComponent {
+	constructor() {
+		super();
+
+		this.store = Store.getInstance();
+		this.element = renderService.htmlToElement(template, [], styles);
+	}
 	#add = event => {
-		console.log(event.target);
 		const formValues = formService.getFormValues(event.target);
-		console.log(formValues);
+
+		if (!this.store.state.block) {
+			this.store.updateBlocks({
+				title: formValues['title-block'],
+				tasks: [{ title: formValues['task'], time: formValues['time'] }]
+			});
+		} else {
+			this.store.addTask({
+				title: formValues['task'],
+				time: formValues['time']
+			});
+		}
+
+		this.#reset();
 	};
 
 	#reset = () => {
@@ -24,8 +43,6 @@ export class CreateTask extends ChildComponent {
 	};
 
 	render() {
-		this.element = renderService.htmlToElement(template, [], styles);
-
 		$R(this.element)
 			.find('#create-task')
 			.append(
