@@ -23,6 +23,51 @@ export class CreateTaskItem extends ChildComponent {
 		$R(document.body).append(new Modal(new DeleteModal(id).render()).render());
 	};
 
+	#updateTask = (id, title, time) => {
+		this.store.updateTask(id, title, time);
+
+		$R(document.body).find('form').find("[name='task']").value('');
+		$R(document.body).find('form').find("[name='time']").value('');
+
+		const buttons = $R(document.body).find('form').find('#buttons');
+
+		buttons.find("[name='saveButton']").remove();
+
+		buttons.find('button:last-child').show();
+		buttons.find('button:first-child').show();
+	};
+
+	#edit = (event, id) => {
+		const previousButton = $R(this.element).getPreviousElementSibling(
+			event.target.parentNode
+		);
+
+		const time = previousButton.textContent;
+		const task = $R(this.element).getPreviousElementSibling(
+			previousButton
+		).textContent;
+
+		$R(document.body).find('form').find("[name='task']").value(task);
+		$R(document.body).find('form').find("[name='time']").value(time);
+
+		const buttons = $R(document.body).find('form').find('#buttons');
+		buttons.find('button:last-child').hide();
+		buttons.find('button:first-child').hide();
+		buttons.append(
+			new Button({
+				children: 'Сохранить',
+				type: 'button',
+				name: 'saveButton',
+				onClick: () =>
+					this.#updateTask(
+						id,
+						$R(document.body).find('form').find("[name='task']").value(),
+						$R(document.body).find('form').find("[name='time']").value()
+					)
+			}).render()
+		);
+	};
+
 	render() {
 		$R(this.element)
 			.append(new Text(this.task.title).render())
@@ -31,7 +76,8 @@ export class CreateTaskItem extends ChildComponent {
 				new Button({
 					children: '<img src="/icon/edit.svg" alt="edit">',
 					type: 'button',
-					variant: 'gray'
+					variant: 'gray',
+					onClick: event => this.#edit(event, this.task.id)
 				}).render()
 			)
 			.append(

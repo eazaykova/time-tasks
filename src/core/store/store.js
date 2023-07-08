@@ -80,7 +80,7 @@ export class Store {
 
 	/**
 	 * Delete task.
-	 * @param {Object} task - The task object.
+	 * @param {number} id - The task object.
 	 */
 	deleteTask(id) {
 		const newTasks = this.state.block.block.tasks.filter(
@@ -88,6 +88,28 @@ export class Store {
 		);
 		this.state.block.block.tasks.length = 0;
 		this.state.block.block.tasks.push(...newTasks);
+		this.notify();
+	}
+
+	/**
+	 * Update task.
+	 * @param {number} id - The task object.
+	 */
+	updateTask(id, title, time) {
+		console.log('ff');
+		const updateTask = {};
+		let indexTask = 0;
+		this.state.block.block.tasks.forEach((current, index) => {
+			if (current.id === id) {
+				updateTask.id = id;
+				updateTask.title = title;
+				updateTask.time = time;
+				indexTask = index;
+			}
+		});
+
+		this.state.block.block.tasks[indexTask] = updateTask;
+
 		this.notify();
 	}
 }

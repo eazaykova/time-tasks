@@ -43,6 +43,10 @@ class RQuery {
 		return Array.from(elements).map(element => new RQuery(element));
 	}
 
+	getPreviousElementSibling(value) {
+		return value.previousElementSibling;
+	}
+
 	/*  INSERT */
 
 	/**
@@ -173,6 +177,24 @@ class RQuery {
 	}
 
 	/* STYLES */
+
+	/**
+	 *Shows the selected element by removing the 'display' style property.
+	 @returns {RQuery} - The current RQuery instance for chaining.
+	 */
+	show() {
+		this.element.style.removeProperty('display');
+		return this;
+	}
+
+	/**
+	 * Hides the selected element by setting its display style to 'none'.
+	 * @returns {RQuery} - The current RQuery instance for chaining.
+	 */
+	hide() {
+		this.element.style.display = 'none';
+		return this;
+	}
 
 	/**
 	 * Set the CSS style of the selected element.

@@ -6,7 +6,7 @@ import styles from './button.module.scss';
 import template from './button.template.html';
 
 export class Button extends ChildComponent {
-	constructor({ children, onClick, type, variant }) {
+	constructor({ children, onClick, type, variant, name }) {
 		super();
 
 		if (!children) throw new Error('Children is empty!');
@@ -14,6 +14,7 @@ export class Button extends ChildComponent {
 		this.onClick = onClick;
 		this.type = type;
 		this.variant = variant;
+		this.name = name;
 	}
 
 	render() {
@@ -22,6 +23,7 @@ export class Button extends ChildComponent {
 		$R(this.element).html(this.children).click(this.onClick);
 
 		if (this.type) $R(this.element).attr('type', this.type);
+		if (this.name) $R(this.element).attr('name', this.name);
 
 		if (this.variant) $R(this.element).addClass(styles[this.variant]);
 
