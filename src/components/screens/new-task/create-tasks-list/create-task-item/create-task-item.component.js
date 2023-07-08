@@ -13,12 +13,13 @@ export class CreateTaskItem extends ChildComponent {
 		super();
 		this.task = task;
 		this.element = renderService.htmlToElement(template, [], styles);
+		console.log(task);
 	}
 
 	render() {
 		$R(this.element)
-			.append(new Text('Test').render())
-			.append(new Text('18:54').render())
+			.append(new Text(this.task.title).render())
+			.append(new Text(this.task.time).render())
 			.append(
 				new Button({
 					children: '<img src="/icon/edit.svg" alt="edit">',

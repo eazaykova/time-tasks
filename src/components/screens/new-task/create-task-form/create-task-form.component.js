@@ -39,9 +39,13 @@ export class CreateTaskForm extends ChildComponent {
 	};
 
 	#reset = () => {
-		$R(this.element).find("[name='title-block']").value('');
 		$R(this.element).find("[name='task']").value('');
 		$R(this.element).find("[name='time']").value('');
+	};
+
+	#resetAll = () => {
+		$R(this.element).find("[name='title-block']").value('');
+		this.#reset();
 	};
 
 	render() {
@@ -79,7 +83,7 @@ export class CreateTaskForm extends ChildComponent {
 			.append(
 				new Button({
 					children: 'Сбросить',
-					onClick: () => this.#reset(),
+					onClick: () => this.#resetAll(),
 					variant: 'gray',
 					type: 'button'
 				}).render()

@@ -75,5 +75,6 @@ export class Store {
 	addTask(task) {
 		const block = this.state.block;
 		block.block.tasks.push(task);
+		this.notify();
 	}
 }
