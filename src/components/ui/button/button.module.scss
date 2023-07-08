@@ -22,11 +22,21 @@
 		}
 	}
 
-	&.gray {
+	&.gray,
+	&.dark-gray {
 		background-color: rgba($text-gray, 40%);
 		&:hover {
 			background-color: rgba($text-gray, 70%);
+		}
+	}
+
+	&.gray {
+		&:hover {
 			color: $gray;
 		}
+	}
+
+	&.dark-gray {
+		color: $gray;
 	}
 }

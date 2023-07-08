@@ -227,6 +227,15 @@ class RQuery {
 			return this;
 		}
 	}
+
+	/**
+	 * Removes an element from the DOM tree it is in.
+	 * @returns {RQuery} - The current RQuery instance for chaining.
+	 */
+	remove() {
+		this.element.remove();
+		return this;
+	}
 }
 
 /**

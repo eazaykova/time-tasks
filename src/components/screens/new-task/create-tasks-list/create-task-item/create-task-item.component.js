@@ -3,7 +3,9 @@ import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
 import { Store } from '@/core/store/store';
 
+import { DeleteModal } from '@/components/screens/modals/deleteModal/deleteModal.component';
 import { Button } from '@/components/ui/button/button.component';
+import { Modal } from '@/components/ui/modal/modal.component';
 import { Text } from '@/components/ui/text/text.component';
 
 import styles from './create-task-item.module.scss';
@@ -18,7 +20,7 @@ export class CreateTaskItem extends ChildComponent {
 	}
 
 	#delete = id => {
-		this.store.deleteTask(id);
+		$R(document.body).append(new Modal(new DeleteModal(id).render()).render());
 	};
 
 	render() {

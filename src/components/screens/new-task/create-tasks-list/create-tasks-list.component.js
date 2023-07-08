@@ -18,13 +18,16 @@ export class CreateTasksList extends ChildComponent {
 
 	update() {
 		this.tasks = this.store.state.block?.block?.tasks;
-		console.log(this.tasks);
 
 		if (this.tasks) {
-			this.tasks.forEach((task, index) => {
-				if (index === 0) $R(this.element).text('');
-				$R(this.element).append(new CreateTaskItem(task).render());
-			});
+			if (this.tasks.length > 0) {
+				this.tasks.forEach((task, index) => {
+					if (index === 0) $R(this.element).text('');
+					$R(this.element).append(new CreateTaskItem(task).render());
+				});
+			} else {
+				$R(this.element).text('Задачи еще не добавлены!');
+			}
 		} else {
 			$R(this.element).text('Задачи еще не добавлены!');
 		}

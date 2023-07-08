@@ -66,7 +66,10 @@ export class CreateTaskForm extends ChildComponent {
 		} else {
 			let length = this.store.state.block.block.tasks.length;
 			this.store.addTask({
-				id: this.store.state.block.block.tasks[length - 1].id + 1,
+				id:
+					length === 0
+						? 0
+						: this.store.state.block.block.tasks[length - 1].id + 1,
 				title: formValues['task'],
 				time: formValues['time']
 			});
