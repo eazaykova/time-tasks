@@ -3,6 +3,8 @@ import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
 import { Store } from '@/core/store/store';
 
+import { Text } from '@/components/ui/text/text.component';
+
 import styles from './create-tasks-list.module.scss';
 import template from './create-tasks-list.template.html';
 
@@ -17,12 +19,17 @@ export class CreateTasksList extends ChildComponent {
 	}
 
 	update() {
-		this.tasks = this.store.state.block?.block?.tasks;
+		this.state = this.store.state.block?.block;
+		this.titleBlock = this.state?.title;
+		this.tasks = this.state?.tasks;
 
 		if (this.tasks) {
 			if (this.tasks.length > 0) {
 				this.tasks.forEach((task, index) => {
-					if (index === 0) $R(this.element).text('');
+					if (index === 0)
+						$R(this.element)
+							.text('')
+							.append(new Text(` Название блока: ${this.titleBlock}`).render());
 					$R(this.element).append(new CreateTaskItem(task).render());
 				});
 			} else {

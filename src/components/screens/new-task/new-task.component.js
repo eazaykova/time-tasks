@@ -20,6 +20,7 @@ export class NewTask extends ChildComponent {
 			[CreateTaskForm, CreateTasksList],
 			styles
 		);
+
 		return this.element;
 	}
 }

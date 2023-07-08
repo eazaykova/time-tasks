@@ -96,7 +96,6 @@ export class Store {
 	 * @param {number} id - The task object.
 	 */
 	updateTask(id, title, time) {
-		console.log('ff');
 		const updateTask = {};
 		let indexTask = 0;
 		this.state.block.block.tasks.forEach((current, index) => {
@@ -111,5 +110,16 @@ export class Store {
 		this.state.block.block.tasks[indexTask] = updateTask;
 
 		this.notify();
+	}
+
+	/**
+	 * Update title block.
+	 * @param {string} title - The task object.
+	 */
+	updateTitleBlock(title) {
+		if (this.state.block.block.title !== title) {
+			this.state.block.block.title = title;
+			this.notify();
+		}
 	}
 }
