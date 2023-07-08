@@ -77,4 +77,17 @@ export class Store {
 		block.block.tasks.push(task);
 		this.notify();
 	}
+
+	/**
+	 * Delete task.
+	 * @param {Object} task - The task object.
+	 */
+	deleteTask(id) {
+		const newTasks = this.state.block.block.tasks.filter(
+			current => current.id !== id
+		);
+		this.state.block.block.tasks.length = 0;
+		this.state.block.block.tasks.push(...newTasks);
+		this.notify();
+	}
 }

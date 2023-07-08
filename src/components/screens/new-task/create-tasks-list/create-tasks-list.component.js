@@ -18,6 +18,7 @@ export class CreateTasksList extends ChildComponent {
 
 	update() {
 		this.tasks = this.store.state.block?.block?.tasks;
+		console.log(this.tasks);
 
 		if (this.tasks) {
 			this.tasks.forEach((task, index) => {

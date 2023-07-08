@@ -1,6 +1,7 @@
 import ChildComponent from '@/core/component/child.component';
 import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
+import { Store } from '@/core/store/store';
 
 import { Button } from '@/components/ui/button/button.component';
 import { Text } from '@/components/ui/text/text.component';
@@ -12,9 +13,13 @@ export class CreateTaskItem extends ChildComponent {
 	constructor(task) {
 		super();
 		this.task = task;
+		this.store = Store.getInstance();
 		this.element = renderService.htmlToElement(template, [], styles);
-		console.log(task);
 	}
+
+	#delete = id => {
+		this.store.deleteTask(id);
+	};
 
 	render() {
 		$R(this.element)
@@ -31,7 +36,8 @@ export class CreateTaskItem extends ChildComponent {
 				new Button({
 					children: '<img src="/icon/delete.svg" alt="delete">',
 					type: 'button',
-					variant: 'gray'
+					variant: 'gray',
+					onClick: () => this.#delete(this.task.id)
 				}).render()
 			);
 		return this.element;
