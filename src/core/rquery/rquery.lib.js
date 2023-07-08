@@ -175,6 +175,21 @@ class RQuery {
 	/* STYLES */
 
 	/**
+	 * Set the CSS style of the selected element.
+	 * @param {string} property - The CSS property to set.
+	 * @param {string} value - The value to set for the CSS property.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	css(property, value) {
+		if (typeof property !== 'string' || typeof value !== 'string') {
+			throw new Error('Property and value must be string!');
+		}
+
+		this.element.style[property] = value;
+		return this;
+	}
+
+	/**
 	 * Adds a class or a list of classes to the current element.
 	 * @param {string | string[]} classNames - A single class name or
 	 * an array of class names to add to the element.

@@ -2,6 +2,7 @@ import ChildComponent from '@/core/component/child.component';
 import { $R } from '@/core/rquery/rquery.lib';
 import formService from '@/core/services/form.service';
 import renderService from '@/core/services/render.service';
+import validationService from '@/core/services/validation.service';
 import { Store } from '@/core/store/store';
 
 import { Button } from '@/components/ui/button/button.component';
@@ -18,8 +19,44 @@ export class CreateTaskForm extends ChildComponent {
 		this.store = Store.getInstance();
 		this.element = renderService.htmlToElement(template, [], styles);
 	}
+
+	#validateFields(formValues) {
+		const divForm = $R(this.element).find('#create-task-form').findAll('div');
+		if (!formValues['title-block']) {
+			validationService.showError(divForm[0]);
+		}
+
+		if (!formValues['task']) {
+			validationService.showError(divForm[1]);
+		}
+
+		if (!formValues['time']) {
+			validationService.showError(divForm[3]);
+		}
+
+		return (
+			formValues['title-block'] && formValues['task'] && formValues['time']
+		);
+	}
+
+	#deleteValidateFields() {
+		const divForm = $R(this.element).find('#create-task-form').findAll('div');
+		validationService.deleteError(divForm[0]);
+		validationService.deleteError(divForm[1]);
+		validationService.deleteError(divForm[3]);
+		return;
+	}
+
 	#add = event => {
 		const formValues = formService.getFormValues(event.target);
+		if (!this.#validateFields(formValues)) {
+			const setTime = setTimeout(() => {
+				this.#deleteValidateFields();
+				clearTimeout(setTime);
+			}, 2500);
+
+			return;
+		}
 
 		if (!this.store.state.block) {
 			this.store.updateBlocks({
