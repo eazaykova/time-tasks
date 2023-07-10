@@ -122,4 +122,9 @@ export class Store {
 			this.notify();
 		}
 	}
+
+	clearBlock() {
+		this.state.block = null;
+		this.notify();
+	}
 }

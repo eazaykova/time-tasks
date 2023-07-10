@@ -2,4 +2,11 @@
 @import 'src/styles/_mixins.scss';
 
 .new-task {
+	> div > div:last-child {
+		display: flex;
+		justify-content: flex-end;
+		margin: 15px 20px 0px 0px;
+
+		gap: 15px;
+	}
 }

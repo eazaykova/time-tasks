@@ -25,11 +25,10 @@ export class CreateTasksList extends ChildComponent {
 
 		if (this.tasks) {
 			if (this.tasks.length > 0) {
-				this.tasks.forEach((task, index) => {
-					if (index === 0)
-						$R(this.element)
-							.text('')
-							.append(new Text(` Название блока: ${this.titleBlock}`).render());
+				$R(this.element)
+					.text('')
+					.append(new Text(` Название блока: ${this.titleBlock}`).render());
+				this.tasks.forEach(task => {
 					$R(this.element).append(new CreateTaskItem(task).render());
 				});
 			} else {
