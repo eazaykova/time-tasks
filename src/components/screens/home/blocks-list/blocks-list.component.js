@@ -26,10 +26,10 @@ export class BlocksList extends ChildComponent {
 					$R(this.element).append(new BlockItem(block).render());
 				});
 			} else {
-				$R(this.element).text('Задачи еще не добавлены!');
+				$R(this.element).text('Блоки еще не добавлены!');
 			}
 		} else {
-			$R(this.element).text('Задачи еще не добавлены!');
+			$R(this.element).text('Блоки еще не добавлены!');
 		}
 	}
 

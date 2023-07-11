@@ -2,4 +2,7 @@
 @import 'src/styles/_mixins.scss';
 
 .blocks-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
 }

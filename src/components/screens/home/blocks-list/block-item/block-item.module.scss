@@ -7,4 +7,19 @@
 	border: 1px solid #ffffff0e;
 	border-radius: $radius;
 	padding: 15px 20px;
+	gap: 15px;
+	width: 415px;
+
+	> div {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+
+		> button {
+			background-color: inherit;
+			width: 25px;
+			height: 25px;
+			padding: 0;
+		}
+	}
 }

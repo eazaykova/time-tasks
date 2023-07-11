@@ -1,0 +1,31 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_mixins.scss';
+
+.block-task {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid #ffffff0e;
+	border-radius: $radius;
+	padding: 15px;
+
+	> div {
+		background-color: inherit;
+		padding: 0 10px 0 0;
+		&:first-child {
+			&:focus-within {
+				border-color: rgba($primary, 0);
+			}
+		}
+
+		&:nth-child(2) {
+			width: 180px;
+		}
+	}
+
+	> button {
+		padding: 0;
+		width: 40px;
+		height: 40px;
+	}
+}

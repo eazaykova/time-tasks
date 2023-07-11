@@ -22,6 +22,12 @@ export class Field extends ChildComponent {
 		if (this.type === 'time') {
 			$R(this.element).find('input').input({
 				type: this.type,
+				name: this.name,
+				id: this.name
+			});
+		} else if (this.type === 'checkbox') {
+			$R(this.element).find('input').input({
+				type: this.type,
 				name: this.name
 			});
 		} else {
