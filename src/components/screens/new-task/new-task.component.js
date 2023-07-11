@@ -3,7 +3,10 @@ import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
 import { Store } from '@/core/store/store';
 
+import { MessageModal } from '@/components/modals/messageModal/messageModal.component';
+import { ResetBlockModal } from '@/components/modals/resetBlockModal/resetBlockModal.component';
 import { Button } from '@/components/ui/button/button.component';
+import { Modal } from '@/components/ui/modal/modal.component';
 
 import styles from './new-task.module.scss';
 import template from './new-task.template.html';
@@ -20,9 +23,26 @@ export class NewTask extends ChildComponent {
 	}
 
 	#reset = () => {
-		this.store.clearBlock();
-		$R(this.element).find('#buttonsList').hide();
-		$R(document.body).find("[name='title-block']").value('');
+		$R(document.body).append(
+			new Modal(new ResetBlockModal().render()).render()
+		);
+	};
+
+	#saveBlockLS = () => {
+		let isExists = this.store.updateBlockLS();
+		if (isExists) {
+			$R(document.body).append(
+				new Modal(new MessageModal('Блок успешно сохранен!').render()).render()
+			);
+			$R(document.body).find('form').find("[name='title-block']").value('');
+			this.store.clearBlock();
+		} else {
+			$R(document.body).append(
+				new Modal(
+					new MessageModal('Блок с таким именем уже существует!').render()
+				).render()
+			);
+		}
 	};
 
 	update() {
@@ -37,7 +57,8 @@ export class NewTask extends ChildComponent {
 						new Button({
 							children: 'Сохранить',
 							type: 'button',
-							variant: 'green'
+							variant: 'green',
+							onClick: () => this.#saveBlockLS()
 						}).render()
 					)
 					.append(

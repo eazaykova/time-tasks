@@ -3,7 +3,7 @@ import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
 import { Store } from '@/core/store/store';
 
-import { DeleteModal } from '@/components/screens/modals/deleteModal/deleteModal.component';
+import { DeleteModal } from '@/components/modals/deleteModal/deleteModal.component';
 import { Button } from '@/components/ui/button/button.component';
 import { Modal } from '@/components/ui/modal/modal.component';
 import { Text } from '@/components/ui/text/text.component';

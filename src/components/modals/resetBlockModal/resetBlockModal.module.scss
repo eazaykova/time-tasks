@@ -1,0 +1,13 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_mixins.scss';
+
+.resetBlockModal {
+	text-align: center;
+	> div {
+		margin-bottom: 15px;
+	}
+
+	& > button:last-child {
+		margin-left: 15px;
+	}
+}

@@ -33,6 +33,7 @@ export class CreateTasksList extends ChildComponent {
 				});
 			} else {
 				$R(this.element).text('Задачи еще не добавлены!');
+				$R(document.body)?.find('#buttonsList')?.hide();
 			}
 		} else {
 			$R(this.element).text('Задачи еще не добавлены!');

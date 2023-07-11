@@ -1,0 +1,10 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_mixins.scss';
+
+.block-item {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #ffffff0e;
+	border-radius: $radius;
+	padding: 15px 20px;
+}
