@@ -1,9 +1,10 @@
 import ChildComponent from '@/core/component/child.component';
 import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
-import { StorageService } from '@/core/services/storage.service';
 
+import { DeleteBlockModal } from '@/components/modals/deleteBlockModal/deleteBlockModal.component';
 import { Button } from '@/components/ui/button/button.component';
+import { Modal } from '@/components/ui/modal/modal.component';
 import { Text } from '@/components/ui/text/text.component';
 
 import styles from './block-item.module.scss';
@@ -16,12 +17,13 @@ export class BlockItem extends ChildComponent {
 		super();
 
 		this.block = block;
-		this.storageService = new StorageService();
 		this.element = renderService.htmlToElement(template, [], styles);
 	}
 
 	#delete = title => {
-		this.storageService.deleteBlock(title);
+		$R(document.body).append(
+			new Modal(new DeleteBlockModal(title).render()).render()
+		);
 	};
 
 	render() {
