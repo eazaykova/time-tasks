@@ -1,3 +1,5 @@
+import { BLOCKS_KEY } from '@/constants/blocks.constants';
+
 /**
  * StorageService is a class that provides an interface for working with localStorage
  * in a more convenient and structured way.
@@ -38,5 +40,28 @@ export class StorageService {
 	 */
 	clear() {
 		localStorage.clear();
+	}
+
+	deleteBlock(title) {
+		const oldBlocks = this.getItem(BLOCKS_KEY);
+		const newBlocks = oldBlocks.filter(current => current.title !== title);
+		this.setItem(BLOCKS_KEY, [...newBlocks]);
+	}
+
+	addBlock(block) {
+		if (this.getItem(BLOCKS_KEY)) {
+			const blocks = this.getItem(BLOCKS_KEY);
+			let isBlockExists = blocks.some(current => current.title === block.title);
+
+			if (!isBlockExists) {
+				this.setItem(BLOCKS_KEY, [...blocks, block]);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			this.setItem(BLOCKS_KEY, [block]);
+			return true;
+		}
 	}
 }

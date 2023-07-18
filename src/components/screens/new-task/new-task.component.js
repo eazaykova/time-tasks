@@ -1,6 +1,7 @@
 import ChildComponent from '@/core/component/child.component';
 import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
+import { StorageService } from '@/core/services/storage.service';
 import { Store } from '@/core/store/store';
 
 import { MessageModal } from '@/components/modals/messageModal/messageModal.component';
@@ -19,6 +20,7 @@ export class NewTask extends ChildComponent {
 		super();
 
 		this.store = Store.getInstance();
+		this.storageService = new StorageService();
 		this.store.addObserver(this);
 	}
 
@@ -29,7 +31,7 @@ export class NewTask extends ChildComponent {
 	};
 
 	#saveBlockLS = () => {
-		let isExists = this.store.updateBlockLS();
+		let isExists = this.storageService.addBlock(this.store.state.block?.block);
 		if (isExists) {
 			$R(document.body).append(
 				new Modal(new MessageModal('Блок успешно сохранен!').render()).render()

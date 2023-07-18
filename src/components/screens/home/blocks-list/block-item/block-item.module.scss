@@ -21,5 +21,14 @@
 			height: 25px;
 			padding: 0;
 		}
+
+		> a {
+			display: flex;
+			align-items: center;
+			border-bottom: 0px;
+			&:hover {
+				border-bottom: 0px;
+			}
+		}
 	}
 }

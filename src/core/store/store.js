@@ -1,7 +1,5 @@
 import { StorageService } from '../services/storage.service';
 
-import { BLOCKS_KEY } from '@/constants/blocks.constants';
-
 export class Store {
 	/**
 	 * Create a new Store instance.
@@ -9,13 +7,9 @@ export class Store {
 	 */
 	constructor(initialState) {
 		this.observers = [];
-
 		this.storageService = new StorageService();
-		/*const savedUser = this.storageService.getItem(USER_STORAGE_KEY);*/
 
-		const state = /*savedUser ? { block: savedUser } : */ initialState;
-
-		this.state = new Proxy(state, {
+		this.state = new Proxy(initialState, {
 			set: (target, property, value) => {
 				target[property] = value;
 
@@ -69,7 +63,6 @@ export class Store {
 		const oldBlock = this.state.block;
 		const newBlock = { ...oldBlock, block };
 		this.state.block = newBlock;
-		/*this.storageService.setItem(USER_STORAGE_KEY, newUser);*/
 	}
 
 	/**
@@ -130,25 +123,5 @@ export class Store {
 	clearBlock() {
 		this.state.block = null;
 		this.notify();
-	}
-
-	updateBlockLS() {
-		this.block = this.state.block?.block;
-		if (this.storageService.getItem(BLOCKS_KEY)) {
-			const blocks = this.storageService.getItem(BLOCKS_KEY);
-			let isBlockExists = blocks.some(
-				current => current.title === this.state.block.block.title
-			);
-
-			if (!isBlockExists) {
-				this.storageService.setItem(BLOCKS_KEY, [...blocks, this.block]);
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			this.storageService.setItem(BLOCKS_KEY, [this.block]);
-			return true;
-		}
 	}
 }
