@@ -39,7 +39,7 @@ export class BlockItem extends ChildComponent {
 			);
 
 		this.block.tasks.forEach(task => {
-			$R(this.element).append(new BlockTask(task).render());
+			$R(this.element).append(new BlockTask(this.block.title, task).render());
 		});
 		return this.element;
 	}

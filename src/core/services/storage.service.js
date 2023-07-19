@@ -64,4 +64,28 @@ export class StorageService {
 			return true;
 		}
 	}
+
+	taskStatus(titleBlock, idTask, status) {
+		const blocks = this.getItem(BLOCKS_KEY);
+		const block = blocks
+			.filter(current => current.title === titleBlock)
+			.map(current => {
+				current.tasks.map(item => {
+					if (item.id === idTask) {
+						item.done = status;
+					}
+					return item;
+				});
+				return current;
+			});
+
+		const newBlocks = blocks.map(current => {
+			if (current.title === titleBlock) {
+				current = block[0];
+			}
+			return current;
+		});
+
+		this.setItem(BLOCKS_KEY, newBlocks);
+	}
 }

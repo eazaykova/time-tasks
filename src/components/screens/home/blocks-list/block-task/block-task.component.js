@@ -1,6 +1,7 @@
 import ChildComponent from '@/core/component/child.component';
 import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
+import { StorageService } from '@/core/services/storage.service';
 
 import { Button } from '@/components/ui/button/button.component';
 import { Field } from '@/components/ui/field/field.component';
@@ -10,23 +11,28 @@ import styles from './block-task.module.scss';
 import template from './block-task.template.html';
 
 export class BlockTask extends ChildComponent {
-	constructor(task) {
+	constructor(titleBlock, task) {
 		super();
+		this.titleBlock = titleBlock;
 		this.task = task;
+		this.storageService = new StorageService();
 		this.element = renderService.htmlToElement(template, [], styles);
 	}
 
 	#doneTask = event => {
+		console.log('aaa');
 		if (event.target.checked) {
+			$R(this.element).addClass('done');
 			if (this.task.time) {
-				$R(this.element).addClass('done');
 				$R(this.element).find('button').hide();
 			}
+			this.storageService.taskStatus(this.titleBlock, this.task.id, true);
 		} else {
 			$R(this.element).removeClass('done');
 			if (this.task.time) {
 				$R(this.element).find('button').show();
 			}
+			this.storageService.taskStatus(this.titleBlock, this.task.id, false);
 		}
 	};
 
@@ -51,6 +57,17 @@ export class BlockTask extends ChildComponent {
 						variant: 'gray'
 					}).render()
 				);
+		}
+
+		if (this.task.done) {
+			$R(this.element)
+				.find(`[name='checkbox${this.task.id}']`)
+				.attr('checked', true);
+
+			$R(this.element).addClass('done');
+			if (this.task.time) {
+				$R(this.element).find('button').hide();
+			}
 		}
 
 		return this.element;

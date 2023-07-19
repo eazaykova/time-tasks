@@ -51,7 +51,12 @@ export class CreateTaskForm extends ChildComponent {
 				this.store.updateBlocks({
 					title: formValues['title-block'],
 					tasks: [
-						{ id: 0, title: formValues['task'], time: formValues['time'] }
+						{
+							id: 0,
+							title: formValues['task'],
+							time: formValues['time'],
+							done: false
+						}
 					]
 				});
 			} else {
@@ -68,7 +73,8 @@ export class CreateTaskForm extends ChildComponent {
 							? 0
 							: this.store.state.block.block.tasks[length - 1].id + 1,
 					title: formValues['task'],
-					time: formValues['time']
+					time: formValues['time'],
+					done: false
 				});
 			}
 
