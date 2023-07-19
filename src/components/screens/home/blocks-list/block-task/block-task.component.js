@@ -15,23 +15,43 @@ export class BlockTask extends ChildComponent {
 		this.task = task;
 		this.element = renderService.htmlToElement(template, [], styles);
 	}
+
+	#doneTask = event => {
+		if (event.target.checked) {
+			if (this.task.time) {
+				$R(this.element).addClass('done');
+				$R(this.element).find('button').hide();
+			}
+		} else {
+			$R(this.element).removeClass('done');
+			if (this.task.time) {
+				$R(this.element).find('button').show();
+			}
+		}
+	};
+
 	render() {
 		$R(this.element)
 			.append(
 				new Field({
 					type: 'checkbox',
-					name: `checkbox${this.task.id}`
+					name: `checkbox${this.task.id}`,
+					onClick: event => this.#doneTask(event)
 				}).render()
 			)
-			.append(new Text(this.task.title).render())
-			.append(new Text(this.task.time).render())
-			.append(
-				new Button({
-					children: '<img src="/icon/play.svg" alt="play">',
-					type: 'button',
-					variant: 'gray'
-				}).render()
-			);
+			.append(new Text(this.task.title).render());
+
+		if (this.task.time) {
+			$R(this.element)
+				.append(new Text(this.task.time).render())
+				.append(
+					new Button({
+						children: '<img src="/icon/play.svg" alt="play">',
+						type: 'button',
+						variant: 'gray'
+					}).render()
+				);
+		}
 
 		return this.element;
 	}

@@ -71,7 +71,12 @@ export class Store {
 	 */
 	addTask(task) {
 		const block = this.state.block;
-		block.block.tasks.push(task);
+		if (block.block.tasks) {
+			block.block.tasks.push(task);
+		} else {
+			block.block.tasks = [task];
+		}
+
 		this.notify();
 	}
 
@@ -114,9 +119,11 @@ export class Store {
 	 * @param {string} title - The task object.
 	 */
 	updateTitleBlock(title) {
-		if (this.state.block.block.title !== title) {
-			this.state.block.block.title = title;
-			this.notify();
+		if (this.state.block) {
+			if (this.state.block.block.title !== title) {
+				this.state.block.block.title = title;
+				this.notify();
+			}
 		}
 	}
 

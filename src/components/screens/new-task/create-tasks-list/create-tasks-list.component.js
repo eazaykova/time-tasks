@@ -23,6 +23,12 @@ export class CreateTasksList extends ChildComponent {
 		this.titleBlock = this.state?.title;
 		this.tasks = this.state?.tasks;
 
+		if (this.titleBlock) {
+			$R(this.element)
+				.text('')
+				.append(new Text(` Название блока: ${this.titleBlock}`).render());
+		}
+
 		if (this.tasks) {
 			if (this.tasks.length > 0) {
 				$R(this.element)
@@ -36,7 +42,14 @@ export class CreateTasksList extends ChildComponent {
 				$R(document.body)?.find('#buttonsList')?.hide();
 			}
 		} else {
-			$R(this.element).text('Задачи еще не добавлены!');
+			if (this.titleBlock) {
+				$R(this.element)
+					.text('')
+					.append(new Text(` Название блока: ${this.titleBlock}`).render())
+					.append(new Text(` Задачи еще не добавлены!`).render());
+			} else {
+				$R(this.element).text('Задачи еще не добавлены!');
+			}
 		}
 	}
 

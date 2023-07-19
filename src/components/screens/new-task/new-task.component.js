@@ -38,6 +38,7 @@ export class NewTask extends ChildComponent {
 			);
 			$R(document.body).find('form').find("[name='title-block']").value('');
 			this.store.clearBlock();
+			$R(document.body).find('#buttonsList').hide();
 		} else {
 			$R(document.body).append(
 				new Modal(

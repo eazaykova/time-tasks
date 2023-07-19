@@ -40,4 +40,11 @@ a {
 	}
 }
 
+.done {
+	font-style: italic;
+	color: $text-gray;
+	text-decoration: line-through;
+	text-decoration-color: rgb(57, 57, 255);
+}
+
 @import './keyframes';

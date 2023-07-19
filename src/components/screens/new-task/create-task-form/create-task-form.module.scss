@@ -16,13 +16,13 @@ form {
 		& > div:first-child {
 			grid-column-start: 1;
 			grid-column-end: 4;
-			margin-bottom: 1.3rem;
 		}
 
 		& > div:not(:first-child) {
 			grid-row-start: 2;
 			grid-row-end: 3;
 			color: $text-gray;
+			margin-top: 1.3rem;
 		}
 
 		& > :nth-child(3) {

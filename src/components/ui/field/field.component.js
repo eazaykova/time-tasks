@@ -6,7 +6,14 @@ import styles from './field.module.scss';
 import template from './field.template.html';
 
 export class Field extends ChildComponent {
-	constructor({ placeholder, type = 'text', value = '', name, variant }) {
+	constructor({
+		placeholder,
+		type = 'text',
+		value = '',
+		name,
+		variant,
+		onClick
+	}) {
 		super();
 		if (!name) throw new Error('Please fill field "name"!');
 
@@ -15,6 +22,7 @@ export class Field extends ChildComponent {
 		this.value = value;
 		this.name = name;
 		this.variant = variant;
+		this.onClick = onClick;
 	}
 
 	render() {
@@ -26,10 +34,13 @@ export class Field extends ChildComponent {
 				id: this.name
 			});
 		} else if (this.type === 'checkbox') {
-			$R(this.element).find('input').input({
-				type: this.type,
-				name: this.name
-			});
+			$R(this.element)
+				.find('input')
+				.input({
+					type: this.type,
+					name: this.name
+				})
+				.click(this.onClick);
 		} else {
 			$R(this.element).find('input').input({
 				placeholder: this.placeholder,

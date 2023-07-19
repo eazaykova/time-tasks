@@ -229,6 +229,23 @@ class RQuery {
 	}
 
 	/**
+	 * Removes a class or a list of classes to the current element.
+	 * @param {string | string[]} classNames - A single class name or
+	 * an array of class names to remove from the element.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	removeClass(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.remove(className);
+			}
+		} else {
+			this.element.classList.remove(classNames);
+		}
+		return this;
+	}
+
+	/**
 	 * Set or get the value of an attribute on the selected element.
 	 * @param {string} attributeName - The name of the attribute to set
 	 * or get.

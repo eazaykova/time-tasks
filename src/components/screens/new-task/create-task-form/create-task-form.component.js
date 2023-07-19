@@ -26,24 +26,12 @@ export class CreateTaskForm extends ChildComponent {
 			validationService.showError(divForm[0]);
 		}
 
-		if (!formValues['task']) {
-			validationService.showError(divForm[1]);
-		}
-
-		if (!formValues['time']) {
-			validationService.showError(divForm[3]);
-		}
-
-		return (
-			formValues['title-block'] && formValues['task'] && formValues['time']
-		);
+		return formValues['title-block'];
 	}
 
 	#deleteValidateFields() {
 		const divForm = $R(this.element).find('#create-task-form').findAll('div');
 		validationService.deleteError(divForm[0]);
-		validationService.deleteError(divForm[1]);
-		validationService.deleteError(divForm[3]);
 		return;
 	}
 
@@ -59,23 +47,35 @@ export class CreateTaskForm extends ChildComponent {
 		}
 
 		if (!this.store.state.block) {
-			this.store.updateBlocks({
-				title: formValues['title-block'],
-				tasks: [{ id: 0, title: formValues['task'], time: formValues['time'] }]
-			});
+			if (formValues['task']) {
+				this.store.updateBlocks({
+					title: formValues['title-block'],
+					tasks: [
+						{ id: 0, title: formValues['task'], time: formValues['time'] }
+					]
+				});
+			} else {
+				this.store.updateBlocks({
+					title: formValues['title-block']
+				});
+			}
 		} else {
-			let length = this.store.state.block.block.tasks.length;
-			this.store.addTask({
-				id:
-					length === 0
-						? 0
-						: this.store.state.block.block.tasks[length - 1].id + 1,
-				title: formValues['task'],
-				time: formValues['time']
-			});
+			if (formValues['task']) {
+				let length = this.store.state.block.block.tasks?.length || 0;
+				this.store.addTask({
+					id:
+						length === 0
+							? 0
+							: this.store.state.block.block.tasks[length - 1].id + 1,
+					title: formValues['task'],
+					time: formValues['time']
+				});
+			}
 
 			this.store.updateTitleBlock(formValues['title-block']);
 		}
+
+		console.log(this.store);
 
 		this.#reset();
 	};
