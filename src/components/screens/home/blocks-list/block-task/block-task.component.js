@@ -3,8 +3,10 @@ import { $R } from '@/core/rquery/rquery.lib';
 import renderService from '@/core/services/render.service';
 import { StorageService } from '@/core/services/storage.service';
 
+import { TimerModal } from '@/components/modals/timerModal/timerModal.component';
 import { Button } from '@/components/ui/button/button.component';
 import { Field } from '@/components/ui/field/field.component';
+import { Modal } from '@/components/ui/modal/modal.component';
 import { Text } from '@/components/ui/text/text.component';
 
 import styles from './block-task.module.scss';
@@ -36,6 +38,12 @@ export class BlockTask extends ChildComponent {
 		}
 	};
 
+	#timer = () => {
+		$R(document.body).append(
+			new Modal(new TimerModal(this.titleBlock, this.task).render()).render()
+		);
+	};
+
 	render() {
 		$R(this.element)
 			.append(
@@ -54,7 +62,8 @@ export class BlockTask extends ChildComponent {
 					new Button({
 						children: '<img src="/icon/play.svg" alt="play">',
 						type: 'button',
-						variant: 'gray'
+						variant: 'gray',
+						onClick: () => this.#timer()
 					}).render()
 				);
 		}

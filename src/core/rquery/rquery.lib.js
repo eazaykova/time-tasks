@@ -134,6 +134,15 @@ class RQuery {
 		}
 	}
 
+	innerText(newValue) {
+		if (typeof newValue === 'undefined') {
+			return this.element.innerText;
+		} else {
+			this.element.innerText = newValue;
+			return this;
+		}
+	}
+
 	/**
 	 * Set attributes and event listeners for an input element.
 	 * @param {object} options - An object containing input options.
