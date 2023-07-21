@@ -39,9 +39,6 @@ export class Timer extends ChildComponent {
 				.find('#timer')
 				.text(`${h < 10 ? `0${h}` : h}:${m < 10 ? `0${m}` : m} (h:m)`);
 
-			console.log(`${h < 10 ? `0${h}` : h}:${m < 10 ? `0${m}` : m} (h:m)`);
-			m--;
-
 			if (m === 0) {
 				if (h === 0) {
 					$R(this.element).find('#timer').text(`00:00 (h:m)`);
@@ -51,6 +48,8 @@ export class Timer extends ChildComponent {
 
 				h--;
 				m = 59;
+			} else {
+				m--;
 			}
 		}, 1000);
 	};

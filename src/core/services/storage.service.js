@@ -23,7 +23,13 @@ export class StorageService {
 	 * @param {any} value - The value to be stored.
 	 */
 	setItem(key, value) {
-		localStorage.setItem(key, JSON.stringify(value));
+		try {
+			localStorage.setItem(key, JSON.stringify(value));
+		} catch (e) {
+			if (e == 'QUOTA_EXCEEDED_ERR') {
+				alert('Превышен лимит, удалите ненужные блоки и попробуйте снова!');
+			}
+		}
 	}
 
 	/**
