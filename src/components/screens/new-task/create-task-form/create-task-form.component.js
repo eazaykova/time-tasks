@@ -54,6 +54,7 @@ export class CreateTaskForm extends ChildComponent {
 						{
 							id: 0,
 							title: formValues['task'],
+							firstTime: formValues['time'],
 							time: formValues['time'],
 							done: false
 						}
@@ -73,6 +74,7 @@ export class CreateTaskForm extends ChildComponent {
 							? 0
 							: this.store.state.block.block.tasks[length - 1].id + 1,
 					title: formValues['task'],
+					firstTime: formValues['time'],
 					time: formValues['time'],
 					done: false
 				});
@@ -80,8 +82,6 @@ export class CreateTaskForm extends ChildComponent {
 
 			this.store.updateTitleBlock(formValues['title-block']);
 		}
-
-		console.log(this.store);
 
 		this.#reset();
 	};

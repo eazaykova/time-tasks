@@ -90,6 +90,8 @@ export class StorageService {
 	}
 
 	updateTaskTime(titleBlock, idTask, newTime) {
+		console.log('333');
+		console.log(idTask);
 		const blocks = this.getItem(BLOCKS_KEY);
 		const block = blocks
 			.filter(current => current.title === titleBlock)

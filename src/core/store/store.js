@@ -104,6 +104,7 @@ export class Store {
 			if (current.id === id) {
 				updateTask.id = id;
 				updateTask.title = title;
+				updateTask.firstTime = time;
 				updateTask.time = time;
 				indexTask = index;
 			}

@@ -2,4 +2,18 @@
 @import 'src/styles/_mixins.scss';
 
 .timer {
+	> div {
+		font-size: 38px;
+	}
+
+	> button {
+		text-align: center;
+		background-color: rgba($secondary, 30%);
+		padding: 5px 10px 4px;
+		margin-right: 10px;
+
+		&:hover {
+			background-color: rgba($secondary, 60%);
+		}
+	}
 }

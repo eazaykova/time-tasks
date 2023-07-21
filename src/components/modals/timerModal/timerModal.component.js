@@ -18,10 +18,8 @@ export class TimerModal extends ChildComponent {
 
 	render() {
 		$R(this.element)
-			.append(new Text(this.task.title).render())
-			.append(
-				new Timer(this.titleBlock, this.task.id, this.task.time).render()
-			);
+			.append(new Timer(this.titleBlock, this.task).render())
+			.append(new Text(this.task.title).render());
 		return this.element;
 	}
 }

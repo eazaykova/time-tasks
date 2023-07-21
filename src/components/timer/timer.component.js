@@ -10,12 +10,10 @@ import template from './timer.template.html';
 import { Button } from '../ui/button/button.component';
 
 export class Timer extends ChildComponent {
-	constructor(titleBlock, idTask, time, closeModal) {
+	constructor(titleBlock, task) {
 		super();
 		this.titleBlock = titleBlock;
-		this.idTask = idTask;
-		this.time = time;
-		this.closeModal = closeModal;
+		this.task = task;
 		this.storageService = new StorageService();
 		this.store = Store.getInstance();
 		this.element = renderService.htmlToElement(template, [], styles);
@@ -31,6 +29,7 @@ export class Timer extends ChildComponent {
 			if (!h !== 0) {
 				h--;
 			}
+			m = 59;
 		} else {
 			m--;
 		}
@@ -53,7 +52,7 @@ export class Timer extends ChildComponent {
 				h--;
 				m = 59;
 			}
-		}, 60000);
+		}, 1000);
 	};
 
 	#pause = () => {
@@ -61,9 +60,19 @@ export class Timer extends ChildComponent {
 		let newTime = $R(this.element).find('#timer').innerText();
 		this.storageService.updateTaskTime(
 			this.titleBlock,
-			this.idTask,
+			this.task.id,
 			newTime.split(' ')[0]
 		);
+	};
+
+	#reset = () => {
+		clearInterval(this.interval);
+		this.storageService.updateTaskTime(
+			this.titleBlock,
+			this.task.id,
+			this.task.firstTime
+		);
+		$R(this.element).find('#timer').text(`${this.task.firstTime} (h:m)`);
 	};
 
 	#sound = () => {
@@ -79,30 +88,36 @@ export class Timer extends ChildComponent {
 	};
 
 	render() {
-		$R(this.element).find('#timer').text(`${this.time} (h:m)`);
+		$R(this.element).find('#timer').text(`${this.task.time} (h:m)`);
 
 		$R(this.element)
 			.append(
 				new Button({
-					children: 'Пуск',
+					children: '<img src="/icon/play.svg" alt="play">',
 					type: 'button',
-					variant: 'green',
+					name: 'playTimer',
 					onClick: () => this.#play()
 				}).render()
 			)
 			.append(
 				new Button({
-					children: 'Пауза',
+					children: '<img src="/icon/pause.svg" alt="pause">',
 					type: 'button',
-					variant: 'dark-gray',
+					name: 'pauseTimer',
 					onClick: () => this.#pause()
 				}).render()
 			)
 			.append(
 				new Button({
-					children: 'X',
+					children: '<img src="/icon/reset.svg" alt="reset">',
 					type: 'button',
-					variant: 'gray',
+					onClick: () => this.#reset()
+				}).render()
+			)
+			.append(
+				new Button({
+					children: '<img src="/icon/close.svg" alt="close">',
+					type: 'button',
 					onClick: () => this.#closeModal()
 				}).render()
 			);
