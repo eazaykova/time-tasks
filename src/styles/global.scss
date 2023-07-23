@@ -47,4 +47,13 @@ a {
 	text-decoration-color: rgb(57, 57, 255);
 }
 
+@media (max-width: 600px) {
+	#buttonsList {
+		> button {
+			width: 100px;
+			padding: 10px;
+		}
+	}
+}
+
 @import './keyframes';

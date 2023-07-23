@@ -2,7 +2,12 @@
 @import 'src/styles/_mixins.scss';
 
 .blocks-list {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 	gap: 30px;
+
+	@media (max-width: 450px) {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 20px;
+	}
 }
