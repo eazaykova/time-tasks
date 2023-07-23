@@ -20,6 +20,7 @@ export class NewTask extends ChildComponent {
 		super();
 
 		this.store = Store.getInstance();
+		this.store.clearBlock();
 		this.storageService = new StorageService();
 		this.store.addObserver(this);
 	}
