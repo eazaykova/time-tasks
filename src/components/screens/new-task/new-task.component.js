@@ -19,9 +19,9 @@ export class NewTask extends ChildComponent {
 	constructor() {
 		super();
 
+		this.storageService = new StorageService();
 		this.store = Store.getInstance();
 		this.store.clearBlock();
-		this.storageService = new StorageService();
 		this.store.addObserver(this);
 	}
 

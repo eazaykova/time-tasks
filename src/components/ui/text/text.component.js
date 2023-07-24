@@ -8,6 +8,7 @@ import template from './text.template.html';
 export class Text extends ChildComponent {
 	constructor(text = '') {
 		super();
+
 		this.text = text;
 	}
 	render() {

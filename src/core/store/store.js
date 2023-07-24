@@ -82,7 +82,7 @@ export class Store {
 
 	/**
 	 * Delete task.
-	 * @param {number} id - The task object.
+	 * @param {number} id - Task ID.
 	 */
 	deleteTask(id) {
 		const newTasks = this.state.block.block.tasks.filter(
@@ -95,7 +95,9 @@ export class Store {
 
 	/**
 	 * Update task.
-	 * @param {number} id - The task object.
+	 * @param {number} id - Task ID.
+	 * @param {number} title - Task title.
+	 * @param {number} time - Task time.
 	 */
 	updateTask(id, title, time) {
 		const updateTask = {};
@@ -117,7 +119,7 @@ export class Store {
 
 	/**
 	 * Update title block.
-	 * @param {string} title - The task object.
+	 * @param {string} title - Block title.
 	 */
 	updateTitleBlock(title) {
 		if (this.state.block) {
@@ -128,6 +130,9 @@ export class Store {
 		}
 	}
 
+	/**
+	 * Block cleaning.
+	 */
 	clearBlock() {
 		this.state.block = null;
 		this.notify();

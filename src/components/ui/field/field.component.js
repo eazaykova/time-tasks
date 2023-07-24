@@ -6,14 +6,7 @@ import styles from './field.module.scss';
 import template from './field.template.html';
 
 export class Field extends ChildComponent {
-	constructor({
-		placeholder,
-		type = 'text',
-		value = '',
-		name,
-		variant,
-		onClick
-	}) {
+	constructor({ placeholder, type = 'text', value = '', name, onClick }) {
 		super();
 		if (!name) throw new Error('Please fill field "name"!');
 
@@ -21,7 +14,6 @@ export class Field extends ChildComponent {
 		this.type = type;
 		this.value = value;
 		this.name = name;
-		this.variant = variant;
 		this.onClick = onClick;
 	}
 

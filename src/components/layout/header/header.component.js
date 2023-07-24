@@ -7,12 +7,6 @@ import template from './header.template.html';
 import { Logo } from './logo/logo.component';
 
 export class Header extends ChildComponent {
-	constructor({ router }) {
-		super();
-
-		this.router = router;
-	}
-
 	render() {
 		this.element = renderService.htmlToElement(template, [Logo], styles);
 		return this.element;

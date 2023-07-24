@@ -48,12 +48,21 @@ export class StorageService {
 		localStorage.clear();
 	}
 
+	/**
+	 * Removes an block from localStorage by the provided title.
+	 * @param {string} title - The title of the block to be removed.
+	 */
 	deleteBlock(title) {
 		const oldBlocks = this.getItem(BLOCKS_KEY);
 		const newBlocks = oldBlocks.filter(current => current.title !== title);
 		this.setItem(BLOCKS_KEY, [...newBlocks]);
 	}
 
+	/**
+	 * Adds a block to localStorage if it doesn't exist.
+	 * @param {Object} block - The block to add.
+	 * @returns {true|false} The return true if the block was successfully added, false if the block already exists.
+	 */
 	addBlock(block) {
 		if (this.getItem(BLOCKS_KEY)) {
 			const blocks = this.getItem(BLOCKS_KEY);
@@ -71,6 +80,12 @@ export class StorageService {
 		}
 	}
 
+	/**
+	 * Changes the status of a task in localStorage.
+	 * @param {string} titleBlock - The title of the block to which the task belongs.
+	 * @param {number} idTask - Task ID to change.
+	 * @param {boolean} status - Task status (true - completed, false - not completed)
+	 */
 	taskStatus(titleBlock, idTask, status) {
 		const blocks = this.getItem(BLOCKS_KEY);
 		const block = blocks
@@ -95,9 +110,13 @@ export class StorageService {
 		this.setItem(BLOCKS_KEY, newBlocks);
 	}
 
+	/**
+	 * Change the time of a task in localStorage.
+	 * @param {string} titleBlock - The title of the block to which the task belongs.
+	 * @param {number} idTask - Task ID to change.
+	 * @param {string} newTime - New task completion time.
+	 */
 	updateTaskTime(titleBlock, idTask, newTime) {
-		console.log('333');
-		console.log(idTask);
 		const blocks = this.getItem(BLOCKS_KEY);
 		const block = blocks
 			.filter(current => current.title === titleBlock)

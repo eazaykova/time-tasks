@@ -12,6 +12,7 @@ import { Button } from '../ui/button/button.component';
 export class Timer extends ChildComponent {
 	constructor(titleBlock, task) {
 		super();
+
 		this.titleBlock = titleBlock;
 		this.task = task;
 		this.storageService = new StorageService();

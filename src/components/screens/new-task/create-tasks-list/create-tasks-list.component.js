@@ -13,6 +13,7 @@ import { CreateTaskItem } from './create-task-item/create-task-item.component';
 export class CreateTasksList extends ChildComponent {
 	constructor() {
 		super();
+
 		this.store = Store.getInstance();
 		this.store.addObserver(this);
 		this.element = renderService.htmlToElement(template, [], styles);

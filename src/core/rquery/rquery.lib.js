@@ -43,6 +43,11 @@ class RQuery {
 		return Array.from(elements).map(element => new RQuery(element));
 	}
 
+	/**
+	 * Get previous element sibling.
+	 * @param {HTMLElement} value - The element for which you want to get the previous sibling.
+	 * @returns {HTMLElement} Previous sibling to passed element.
+	 */
 	getPreviousElementSibling(value) {
 		return value.previousElementSibling;
 	}
@@ -134,6 +139,11 @@ class RQuery {
 		}
 	}
 
+	/**
+	 * Gets or sets the innerText.
+	 * @param {string} [newValue] - The new innerText to set. If not provided, the method returns the current value.
+	 * @return {string|RQuery} - If newValue is provided, returns the RQuery instance. Otherwise, returns the current innerText.
+	 */
 	innerText(newValue) {
 		if (typeof newValue === 'undefined') {
 			return this.element.innerText;

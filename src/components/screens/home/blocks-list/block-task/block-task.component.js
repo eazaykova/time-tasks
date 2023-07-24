@@ -15,6 +15,7 @@ import template from './block-task.template.html';
 export class BlockTask extends ChildComponent {
 	constructor(titleBlock, task) {
 		super();
+
 		this.titleBlock = titleBlock;
 		this.task = task;
 		this.storageService = new StorageService();
@@ -22,7 +23,6 @@ export class BlockTask extends ChildComponent {
 	}
 
 	#doneTask = event => {
-		console.log('aaa');
 		if (event.target.checked) {
 			$R(this.element).addClass('done');
 			if (this.task.time) {
