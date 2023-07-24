@@ -52,7 +52,7 @@ export class Timer extends ChildComponent {
 			} else {
 				m--;
 			}
-		}, 1000);
+		}, 60000);
 	};
 
 	#pause = () => {
