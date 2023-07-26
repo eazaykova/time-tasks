@@ -111,7 +111,7 @@ export class CreateTaskForm extends ChildComponent {
 					name: 'task'
 				}).render()
 			)
-			.append(new Text('Таймер (h:m):').render())
+			.append(new Text('Таймер (h:m:s):').render())
 			.append(
 				new Field({
 					type: 'time',

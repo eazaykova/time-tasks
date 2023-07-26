@@ -25,34 +25,49 @@ export class Timer extends ChildComponent {
 		let time = $R(this.element).find('#timer').innerText().split(':');
 		let h = parseInt(time[0]);
 		let m = parseInt(time[1]);
+		let s = parseInt(time[2]);
 
-		if (m === 0) {
-			if (!h !== 0) {
-				h--;
+		if (s === 0) {
+			if (m === 0) {
+				if (!h !== 0) {
+					h--;
+				}
+				m = 59;
+			} else {
+				m--;
 			}
-			m = 59;
+			s = 59;
 		} else {
-			m--;
+			s--;
 		}
 
 		this.interval = setInterval(() => {
 			$R(this.element)
 				.find('#timer')
-				.text(`${h < 10 ? `0${h}` : h}:${m < 10 ? `0${m}` : m} (h:m)`);
+				.text(
+					`${h < 10 ? `0${h}` : h}:${m < 10 ? `0${m}` : m}:${
+						s < 10 ? `0${s}` : s
+					}`
+				);
 
-			if (m === 0) {
-				if (h === 0) {
-					$R(this.element).find('#timer').text(`00:00 (h:m)`);
-					clearInterval(this.interval);
-					this.#sound();
+			if (s === 0) {
+				if (m === 0) {
+					if (h === 0) {
+						$R(this.element).find('#timer').text(`00:00:00`);
+						clearInterval(this.interval);
+						this.#sound();
+					}
+
+					h--;
+					m = 59;
+				} else {
+					m--;
 				}
-
-				h--;
-				m = 59;
+				s = 59;
 			} else {
-				m--;
+				s--;
 			}
-		}, 60000);
+		}, 1000);
 	};
 
 	#pause = () => {
@@ -72,7 +87,7 @@ export class Timer extends ChildComponent {
 			this.task.id,
 			this.task.firstTime
 		);
-		$R(this.element).find('#timer').text(`${this.task.firstTime} (h:m)`);
+		$R(this.element).find('#timer').text(`${this.task.firstTime}`);
 	};
 
 	#sound = () => {
@@ -88,7 +103,7 @@ export class Timer extends ChildComponent {
 	};
 
 	render() {
-		$R(this.element).find('#timer').text(`${this.task.time} (h:m)`);
+		$R(this.element).find('#timer').text(`${this.task.time}`);
 
 		$R(this.element)
 			.append(

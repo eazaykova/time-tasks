@@ -23,7 +23,8 @@ export class Field extends ChildComponent {
 			$R(this.element).find('input').input({
 				type: this.type,
 				name: this.name,
-				id: this.name
+				id: this.name,
+				step: 1
 			});
 		} else if (this.type === 'checkbox') {
 			$R(this.element)
