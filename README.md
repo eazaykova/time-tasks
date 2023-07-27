@@ -2,7 +2,7 @@
 
 ---
 
-![design](readme-assets/1.jpg)
+![design](readme-assets/1.JPG)
 
 ---
 
