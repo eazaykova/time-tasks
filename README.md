@@ -13,7 +13,7 @@ The time tasks implemented on JavaScript. The project was based on the approach 
 ---
 
 ## Opportunities
-_1. Creating a new block and tasks_
+_1. Creating a new block and tasks._
 ![design](readme-assets/1.gif)
 
 _2. Edit and delete the task at the stage of creating a block. Reset data._
