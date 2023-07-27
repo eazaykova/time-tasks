@@ -6,13 +6,13 @@
 
 ---
 
-##Description
+## Description
 
 The time tasks implemented on JavaScript. The project was based on the approach SPA (single page application). Data is stored in the Local Storage.
 
 ---
 
-##Opportunities
+## Opportunities
 _1. Creating a new block and tasks_
 ![design](readme-assets/1.gif)
 
@@ -30,7 +30,7 @@ _5. Delete the block._
 
 ---
 
-##Project setup
+## Project setup
 
 ```cmd
 npm i
